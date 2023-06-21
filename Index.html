@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">>
+    
+<title>Realtime Bus Tracker</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="Mapanimation.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<style>
+  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  .map-overlay{
+      position: absolute;
+      left: 0;
+      padding: 10px;
+  }
+
+</style>
+</head>
+<body>
+    
+<div id="map"></div>
+<!-- Following Div is a container to hold map overlays and navbar -->
+<div class="map-overlay top" style="justify-items: center; min-width: 100%;">
+     <!-- Navigation Bar -->
+     <div class="the-nav-bar"> 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="https://christianabond.github.io"><img src="CB_Logo2.png" width="150px" height="150px" alt=""></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link" href="https://christianabond.github.io">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://christianabond.github.io/projects.html">Projects</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contact Me</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="https://www.linkedin.com/in/christianabond/">LinkedIn</a>
+                  <a class="dropdown-item" href="https://github.com/ChristianaBond">GitHub</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="mailto:christianalbond@outlook.com">Email</a>
+                </div>
+              </li>
+            </ul>    
+          </div>
+        </nav>
+        </div>
+        <!-- End Navigation Bar -->
+      <button onclick="run()" style="margin-top: 8px;" id="run-button">
+        See Bus Locations
+    </button>
+      </div>
+<div class="map-overlay bottom" id="in-service" style="visibility: hidden" style="background-color: e6ddc2;">
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2pvc2VwaHMiLCJhIjoiY2t3aWFtZmFpMTZpMjMxcHdlcTZyamo0eCJ9.2bspyzmohDDgLS8-OsUtGQ'
+
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/gjosephs/ckwlkz1d60d7215masdgiqyly',
+    center: [-71.13627, 42.40115],
+    zoom: 12.15
+});
+
+map.on('load', () => {
+map.addSource('route', {
+    'type': 'geojson',
+    'data': {
+    'type': 'Feature',
+    'properties': {},
+    'geometry': {
+    'type': 'LineString',
+    'coordinates': [
+        [-71.11913, 42.37358],
+        [-71.11856, 42.37587],
+        [-71.11976, 42.37676],
+        [-71.12010, 42.37778],
+        [-71.11914, 42.38692],
+        [-71.11977, 42.38917],
+        [-71.12101, 42.39032],
+        [-71.12384, 42.39172],
+        [-71.13064, 42.39778],
+        [-71.13344, 42.39980],
+        [-71.13680, 42.40136],
+        [-71.14736, 42.40980],
+        [-71.14904, 42.41264],
+        [-71.14937, 42.41302],
+        [-71.15127, 42.41471],
+        [-71.15466, 42.41595],
+        [-71.16352, 42.41728],
+        [-71.17265, 42.42182],
+        [-71.17465, 42.42337],
+        [-71.17590, 42.42353],
+        [-71.17818, 42.42412],
+        [-71.18297, 42.42428],
+        [-71.18498, 42.42475]
+        ]
+    }
+}
+});
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+        },
+        'paint': {
+        'line-color': '#766948',
+        'line-width': 6,
+        'line-opacity' : .5
+        
+        
+        }
+});
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+</body>
+</html>
