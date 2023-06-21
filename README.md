@@ -3,8 +3,10 @@
 
 When the button is clicked, the map displays the location of all currently-running MBTA buses on Route 77 in Boston, MA. 
 
+To see the code function, visit <a href="christianabond.github.io/RealTimeBusTracker">christianabond.github.io/RealTimeBusTracker</a>.
+
 # Roadmap of future improvements
-No improvements planned.
+No improvements are planned.
 
 # License Information
 
